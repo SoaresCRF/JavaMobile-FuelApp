@@ -25,18 +25,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void calcularVantagem (View view) {
-        Double precoGasolina = Double.parseDouble(editGasolina.getText().toString());
-        Double precoEtanol = Double.parseDouble(editEtanol.getText().toString());
-        Double resultado  = precoEtanol / precoGasolina;
+    public void calcularVantagem(View view) {
+        String precoGasolina = editGasolina.getText().toString();
+        String precoEtanol = editEtanol.getText().toString();
+        if (!precoGasolina.isEmpty() && !precoEtanol.isEmpty()) {
+            if (Double.parseDouble(precoGasolina) > 0 && Double.parseDouble(precoEtanol) > 0) {
+                Double resultado = Double.parseDouble(precoEtanol) / Double.parseDouble(precoGasolina);
 
-        if (resultado >= 0.7) {
+                if (resultado >= 0.7) {
+                    imageViewResultado.setVisibility(View.VISIBLE);
+                    imageViewResultado.setImageResource(R.drawable.gasolina);
+                } else {
+                    imageViewResultado.setVisibility(View.VISIBLE);
+                    imageViewResultado.setImageResource(R.drawable.etanol);
+                }
+            } else {
+                imageViewResultado.setVisibility(View.VISIBLE);
+                imageViewResultado.setImageResource(R.drawable.erro);
+            }
+        } else {
             imageViewResultado.setVisibility(View.VISIBLE);
-            imageViewResultado.setImageResource(R.drawable.gasolina);
-        }
-         else {
-            imageViewResultado.setVisibility(View.VISIBLE);
-            imageViewResultado.setImageResource(R.drawable.etanol);
+            imageViewResultado.setImageResource(R.drawable.erro);
         }
 
     }
